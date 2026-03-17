@@ -1,7 +1,7 @@
 import { Product } from "../../db/models/Product.model.js";
 
 export const createProduct = async (req, res, next) => {
-  try {
+
     const { name, price, category, description } = req.body;
 
     const checkProduct = await Product.findOne({ name });
@@ -24,12 +24,9 @@ export const createProduct = async (req, res, next) => {
       message: "Product Created success",
       data: newProduct,
     });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
 };
 export const getAllProduct = async (req, res, next) => {
-  try {
+
     const products = await Product.find();
 
     return res.status(200).json({
@@ -37,12 +34,10 @@ export const getAllProduct = async (req, res, next) => {
       message: "Done!",
       data: products,
     });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
+ 
 };
 export const deleteProduct = async (req, res, next) => {
-  try {
+
     const { id } = req.params;
 
     const product = await Product.findById(id);
@@ -60,12 +55,10 @@ export const deleteProduct = async (req, res, next) => {
       success: true,
       message: "Product deleted successfully",
     });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
+
 };
 export const updateProduct = async (req, res, next) => {
-  try {
+ 
     const { id } = req.params;
 
     const updatedProduct = await Product.findByIdAndUpdate(
@@ -83,7 +76,5 @@ export const updateProduct = async (req, res, next) => {
       message: "Product updated successfully",
       data: updatedProduct,
     });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
+  
 };
